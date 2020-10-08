@@ -9,10 +9,10 @@ namespace ClassesExamples
     {
         double[,] values;
 
-        public static double[,] operator +(double[,] a, double[,] b)
-        {
-            throw new NotImplementedException();
-        }
+        //public static double[,] operator +(double[,] a, double[,] b)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public static double[,] operator +(MatrixBad a, MatrixBad b)
         {

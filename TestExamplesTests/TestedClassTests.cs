@@ -79,7 +79,9 @@ namespace TestExamples.Tests
             yield return new object[] { new List<int> { 1, 2, 3 }, 3 };
             yield return new object[] { new List<int> { 3, 3, 3 }, 3 };
             yield return new object[] { new List<int> { 3, 2, 1 }, 3 };
+            yield return new object[] { new List<int> { 1, 3, 2 }, 3 };
             yield return new object[] { new List<int> { -1, 3, 2 }, 3 };
+            yield return new object[] { new List<int> { 1 }, 1 };
         }
 
         [TestMethod()]

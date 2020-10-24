@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace TestExamples
 {
     [Serializable]
-    public class EmptyListException : Exception
+    internal class EmptyListException : Exception
     {
         public EmptyListException()
         {

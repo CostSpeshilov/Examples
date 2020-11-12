@@ -41,6 +41,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodStatistics", "GoodStati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodPhysics", "GoodPhysics\GoodPhysics.csproj", "{FC782A0B-DC73-4302-83D1-CB2335233C4D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MethodsExamples", "MethodsExamples\MethodsExamples.csproj", "{DEC3A874-C6C0-4E98-A182-73469EEE624C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,10 @@ Global
 		{FC782A0B-DC73-4302-83D1-CB2335233C4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC782A0B-DC73-4302-83D1-CB2335233C4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC782A0B-DC73-4302-83D1-CB2335233C4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEC3A874-C6C0-4E98-A182-73469EEE624C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEC3A874-C6C0-4E98-A182-73469EEE624C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEC3A874-C6C0-4E98-A182-73469EEE624C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEC3A874-C6C0-4E98-A182-73469EEE624C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

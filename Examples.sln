@@ -41,7 +41,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodStatistics", "GoodStati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodPhysics", "GoodPhysics\GoodPhysics.csproj", "{FC782A0B-DC73-4302-83D1-CB2335233C4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MethodsExamples", "MethodsExamples\MethodsExamples.csproj", "{DEC3A874-C6C0-4E98-A182-73469EEE624C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dependencies", "Dependencies\Dependencies.csproj", "{2E5AA03F-D7A1-4167-A8A7-AE75C1EC2DD3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C05F79EFBC}") = "MethodsExamples", "MethodsExamples\MethodsExamples.csproj", "{DEC3A874-C6C0-4E98-A182-73469EEE624C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,6 +103,10 @@ Global
 		{FC782A0B-DC73-4302-83D1-CB2335233C4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC782A0B-DC73-4302-83D1-CB2335233C4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC782A0B-DC73-4302-83D1-CB2335233C4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E5AA03F-D7A1-4167-A8A7-AE75C1EC2DD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E5AA03F-D7A1-4167-A8A7-AE75C1EC2DD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E5AA03F-D7A1-4167-A8A7-AE75C1EC2DD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E5AA03F-D7A1-4167-A8A7-AE75C1EC2DD3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DEC3A874-C6C0-4E98-A182-73469EEE624C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DEC3A874-C6C0-4E98-A182-73469EEE624C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEC3A874-C6C0-4E98-A182-73469EEE624C}.Release|Any CPU.ActiveCfg = Release|Any CPU

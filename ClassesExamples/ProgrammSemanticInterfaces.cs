@@ -48,7 +48,7 @@ namespace ClassesExamples
         {
             //Не могу поменять местами, потому как не определена переменная
             //Ошибка времени компиляции
-            string res2 = SecondMethod(res); 
+            //string res2 = SecondMethod(res); 
             int res = FirstMethod();
             return ThirdMethod(res2);
         }

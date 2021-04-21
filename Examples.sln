@@ -45,7 +45,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dependencies", "Dependencie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MethodsExamples", "MethodsExamples\MethodsExamples.csproj", "{DEC3A874-C6C0-4E98-A182-73469EEE624C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Async", "Async\Async.csproj", "{EA47DB71-22C6-476B-B5AC-3ED35F1ACB6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Async", "Async\Async.csproj", "{EA47DB71-22C6-476B-B5AC-3ED35F1ACB6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reactive", "Reactive\Reactive.csproj", "{5BCC07D6-5D8B-4B2F-BAD4-5277417B81FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -117,6 +119,10 @@ Global
 		{EA47DB71-22C6-476B-B5AC-3ED35F1ACB6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA47DB71-22C6-476B-B5AC-3ED35F1ACB6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA47DB71-22C6-476B-B5AC-3ED35F1ACB6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BCC07D6-5D8B-4B2F-BAD4-5277417B81FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BCC07D6-5D8B-4B2F-BAD4-5277417B81FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BCC07D6-5D8B-4B2F-BAD4-5277417B81FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BCC07D6-5D8B-4B2F-BAD4-5277417B81FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

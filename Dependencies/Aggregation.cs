@@ -13,6 +13,9 @@ namespace Dependencies.Aggregation
         /// </summary>
         public CustomRepository Repository { get; set; }
 
+        /// <summary>
+        /// Репозиторий клиентов
+        /// </summary>
         public CustomRepository repository;
 
 

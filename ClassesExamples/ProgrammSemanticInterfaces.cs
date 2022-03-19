@@ -46,6 +46,7 @@ namespace ClassesExamples
 
         double InvertedMethodCalls()
         {
+            string res2 = string.Empty;
             //Не могу поменять местами, потому как не определена переменная
             //Ошибка времени компиляции
             //string res2 = SecondMethod(res); 

@@ -23,6 +23,20 @@ namespace TestExamples.Tests
             Assert.AreEqual(expected, actual);
         }
 
+        [TestMethod]
+        public void Div2Test()
+        {
+            TestedClass tested = new TestedClass();
+            int a = 10;
+            int b = 2;
+
+            int expected = 5;
+
+            int actual = tested.Div(a, b);
+
+            Assert.AreEqual(expected, actual);
+        }
+
         [TestMethod()]
         public void DivTest()
         {
@@ -52,13 +66,45 @@ namespace TestExamples.Tests
         {
             TestedClass tested = new TestedClass();
             List<int> elements = new List<int> { 3, 3, 3 };
-
             int expected = 3;
 
             int actual = tested.MaxElement(elements);
 
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void PowerTest()
+        {
+            //Arrange
+
+            var sut = new TestedClass();
+
+            var expected = 4;
+            //Act
+
+            var actual = sut.Power(2, 2);
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void Power2Test()
+        {
+            //Arrange
+
+            var sut = new TestedClass();
+
+            var expected = 8;
+            //Act
+
+            var actual = sut.Power(2, 3);
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
+
 
         #endregion
 
@@ -89,7 +135,7 @@ namespace TestExamples.Tests
         {
             TestedClass tested = new TestedClass();
 
-            Assert.ThrowsException<ArgumentNullException>(() =>  tested.MaxElement(null));
+            Assert.ThrowsException<ArgumentNullException>(() => tested.MaxElement(null));
         }
 
         [TestMethod()]
@@ -99,9 +145,56 @@ namespace TestExamples.Tests
 
             Assert.ThrowsException<EmptyListException>(() => tested.MaxElement(new List<int>()));
         }
+
+
         #endregion
 
+        [TestMethod]
+        public void MaxTest()
+        {
+            // Arrange
+            TestedClass sut = new TestedClass();
+            int a = 3;
+            int b = 2;
 
+            int expected = 3;
+            //Act
+            var actual = sut.Max(a, b);
 
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void Max1Test()
+        {
+            // Arrange
+            TestedClass sut = new TestedClass();
+            int a = 1;
+            int b = 2;
+
+            int expected = 2;
+            //Act
+            var actual = sut.Max(a, b);
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void IsFirstGreaterTest()
+        {
+            // Arrange
+            TestedClass sut = new TestedClass();
+            int a = 1;
+            int b = 2;
+
+            var expected = false;
+            //Act
+            var actual = sut.IsFirstGreater(a, b);
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

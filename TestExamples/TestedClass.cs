@@ -18,6 +18,23 @@ namespace TestExamples
             return a / b;
         }
 
+        public double Power(int a, int b)
+        {
+            return Math.Pow(a, b);
+        }
+
+        public int Max(int a, int b)
+        {
+            if (a >= b)
+                return a;
+            return b;
+        }
+
+        public bool IsFirstGreater(int a, int b)
+        {
+            return a > b;
+        }
+
         public int MaxElement(List<int> elements)
         {
             if (elements == null)

@@ -18,8 +18,8 @@ namespace Async
         {
             var ctx = new DispatcherSynchronizationContext();
             Console.WriteLine("Start of Programm");
-
-            // CallerWithAsync3();
+            //Console.WriteLine(GreetingAsync("john"));
+            CallerWithAsync3();
             // CallerWithContinuationTask();
             // MultipleAsyncMethods();
             //MultipleAsyncMethodsWithCombinators1();
@@ -107,7 +107,7 @@ namespace Async
         private static async Task CallerWithAsync()
         {
             Console.WriteLine("started CallerWithAsync in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
-            string result = await GreetingAsync("Stephanie");
+            string result = GreetingAsync("Stephanie").Result;
             Console.WriteLine(result);
             Console.WriteLine("finished GreetingAsync in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
         }
@@ -119,6 +119,10 @@ namespace Async
         private static async void CallerWithAsync2()
         {
             Console.WriteLine("started CallerWithAsync in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
+
+
+
+
             Console.WriteLine(await GreetingAsync("Stephanie"));
             Console.WriteLine("finished GreetingAsync in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
         }
@@ -129,9 +133,17 @@ namespace Async
         /// </summary>
         private static void CallerWithAsync3()
         {
-            Task.Run(async () => await CallerWithAsync()).Wait();
+            Task.Run(async () => {
+                await CallerWithAsync();
+                Console.WriteLine("end CallerWithAsync in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
+            }).Wait();
         }
 
+        private static void CallerWithAsync4()
+        {
+          var t =  Task.Run(CallerWithAsync);
+           
+        }
 
         /// <summary>
         /// Определение асинхронного метода приветствия
@@ -147,6 +159,8 @@ namespace Async
                 //вызов синхронного метода
                 return Greeting(name);
             });
+
+
         }
 
         /// <summary>
@@ -159,6 +173,8 @@ namespace Async
             Console.WriteLine("running greeting in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
 
             Thread.Sleep(3000);
+
+
             return string.Format("Hello, {0}", name);
         }
 

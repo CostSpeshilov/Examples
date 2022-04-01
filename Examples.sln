@@ -55,6 +55,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patterns", "Patterns\Patter
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParallelIssues", "ParallelIssues\ParallelIssues.csproj", "{1141BBCC-322F-4ABB-8E7F-CA6105A286A1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatternsConsoleApplication", "PatternsConsoleApplication\PatternsConsoleApplication.csproj", "{0BE06474-6205-445F-A448-8816097E986F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -137,6 +139,10 @@ Global
 		{1141BBCC-322F-4ABB-8E7F-CA6105A286A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1141BBCC-322F-4ABB-8E7F-CA6105A286A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1141BBCC-322F-4ABB-8E7F-CA6105A286A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BE06474-6205-445F-A448-8816097E986F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BE06474-6205-445F-A448-8816097E986F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BE06474-6205-445F-A448-8816097E986F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BE06474-6205-445F-A448-8816097E986F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -158,6 +164,7 @@ Global
 		{1903543C-592A-4E54-8784-9CFCD8D23936} = {C8E1606E-C357-42AE-81B8-6F3950885C7E}
 		{FC782A0B-DC73-4302-83D1-CB2335233C4D} = {C8E1606E-C357-42AE-81B8-6F3950885C7E}
 		{BFB5984A-C821-49BC-9F4C-C2542A069DE3} = {8958286D-E24F-4497-ABFF-8BE7568AF223}
+		{0BE06474-6205-445F-A448-8816097E986F} = {8958286D-E24F-4497-ABFF-8BE7568AF223}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {63BA0AEB-B346-46D0-814A-73068867BE84}

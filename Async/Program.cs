@@ -18,11 +18,11 @@ namespace Async
         {
             var ctx = new DispatcherSynchronizationContext();
             Console.WriteLine("Start of Programm");
-            //Console.WriteLine(GreetingAsync("john"));
-            CallerWithAsync3();
+            // Console.WriteLine(GreetingAsync("john"));
+            // CallerWithAsync3();
             // CallerWithContinuationTask();
             // MultipleAsyncMethods();
-            //MultipleAsyncMethodsWithCombinators1();
+            // MultipleAsyncMethodsWithCombinators1();
             // MultipleAsyncMethodsWithCombinators2();
 
             Cancellation can = new Cancellation();
@@ -30,7 +30,7 @@ namespace Async
             //can.Cancel();
             //can.CancelMethod();
             // can.CancelRegister();
-
+            can.CancelMultipleTasks();
 
             //DontHandle();
             //HandleOneError();

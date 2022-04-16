@@ -22,7 +22,7 @@ namespace Async
                 }
             }, token);
 
-            //Thread.Sleep(1);
+            Thread.Sleep(1);
             cancellationTokenSource.Cancel();
         }
 
@@ -43,7 +43,7 @@ namespace Async
                 }
             }, token);
 
-            Thread.Sleep(1000);
+            //Thread.Sleep(1000);
             cancellationTokenSource.Cancel();
         }
 
@@ -74,7 +74,6 @@ namespace Async
             token.ThrowIfCancellationRequested();
             for (int i = 0; i < 1000000; i++)
             {
-
                 await Task.Delay(10);
                 Console.WriteLine(i);
             }
@@ -88,10 +87,10 @@ namespace Async
 
             Task.Run(async () =>
             {
-                //token.Register(CancelHandler);
+                //token.Register(() => CancelHandler(5));
                 for (int i = 0; i < 1000000; i++)
                 {
-                    token.Register(() => CancelHandler(i));
+                    token.Register((j) => CancelHandler((int)j), i);
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(10);
                     Console.WriteLine(i);
@@ -102,7 +101,38 @@ namespace Async
             cancellationTokenSource.Cancel();
         }
 
-        private void CancelHandler(int n)
+        public void CancelMultipleTasks()
+        {
+            CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+            CancellationToken token = cancellationTokenSource.Token;
+
+            var task1 = Task.Run(() =>
+            {
+                for (int i = 0; i < 1000000; i++)
+                {
+                    token.ThrowIfCancellationRequested();
+                    Task.Delay(10).Wait();
+                    Console.WriteLine($"{i}  in thread {Thread.CurrentThread.ManagedThreadId} and task {Task.CurrentId}" );
+                   // Console.WriteLine(i);
+                }
+            }, token);
+
+            var task2 = Task.Run(async () =>
+            {
+                for (int i = 0; i < 1000000; i++)
+                {
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(10);
+                    Console.WriteLine($"{i}  in thread {Thread.CurrentThread.ManagedThreadId} and task {Task.CurrentId}");
+                    //Console.WriteLine(i);
+                }
+            }, token);
+
+            cancellationTokenSource.CancelAfter(1000);
+        }
+
+
+            private void CancelHandler(int n)
         {
             for (int i = 0; i < 10; i++)
             {

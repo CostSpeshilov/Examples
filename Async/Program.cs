@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -297,6 +299,55 @@ namespace Async
         {
             await Task.Delay(ms);
             throw new Exception(message);
+        }
+
+
+        static void BlockingOperations()
+        {                       
+            Task<List<int>> taskWithFactoryAndState1 = Task.Factory.StartNew<List<int>>((stateObj) =>
+            {
+                Console.WriteLine("Внутри Task");
+                List<int> ints = new List<int>();
+                for (int i = 0; i < (int)stateObj; i++)
+                {
+                    ints.Add(i);
+                }
+                Task.Delay(1000).Wait();
+                return ints;
+            }, 10000);
+
+            Console.WriteLine("После запуска");
+            taskWithFactoryAndState1.Wait();            // Блокирующее ожидание выполнения Task. Блокируется тот поток, который выполняет этот метод
+            taskWithFactoryAndState1.Dispose();
+            Console.WriteLine("После завершения");      // Это сообщение всегда будет последним
+
+            Stopwatch watch = new Stopwatch();
+            watch.Start();                          // замеряем время выполнения операций
+            // create the task
+            Task<List<int>> taskWithFactoryAndState2 = Task.Factory.StartNew<List<int>>((stateObj) =>
+            {
+                List<int> ints = new List<int>();
+                for (int i = 0; i < (int)stateObj; i++)
+                {
+                    ints.Add(i);
+                    Thread.Sleep(10000);
+                }
+                return ints;
+            }, 1);
+
+            // Task.StartNew не блокирует вызывающий поток, прошло 0 мс
+            Console.WriteLine(string.Format("После запуска, have waited {0}ms",
+                watch.ElapsedMilliseconds));                    
+
+
+            var result = taskWithFactoryAndState2.Result;
+
+            // Свойство экземпляра Result блокирует вызывающий поток, прошло ~10 с
+            Console.WriteLine(string.Format("После окончания, have waited {0}ms",
+                watch.ElapsedMilliseconds));
+
+            taskWithFactoryAndState2.Dispose();
+            Console.ReadLine();
         }
 
     }

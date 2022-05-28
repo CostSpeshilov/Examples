@@ -18,7 +18,7 @@ namespace Async
         /// </summary>
         static void Main()
         {
-            var ctx = new DispatcherSynchronizationContext();
+            //var ctx = new DispatcherSynchronizationContext();
             Console.WriteLine("Start of Programm");
             // Console.WriteLine(GreetingAsync("john"));
             // CallerWithAsync3();
@@ -27,18 +27,18 @@ namespace Async
             // MultipleAsyncMethodsWithCombinators1();
             // MultipleAsyncMethodsWithCombinators2();
 
-            Cancellation can = new Cancellation();
+            //Cancellation can = new Cancellation();
             //can.NotCancel();
             //can.Cancel();
             //can.CancelMethod();
             // can.CancelRegister();
-            can.CancelMultipleTasks();
+            //can.CancelMultipleTasks();
 
             //DontHandle();
             //HandleOneError();
             //StartTwoTasks();
             //StartTwoTasksParallel();
-            //ShowAggregatedException();
+            ShowAggregatedException();
 
             Console.WriteLine("end of Programm");
             Console.ReadLine();
@@ -283,10 +283,11 @@ namespace Async
         {
             try
             {
-                await ThrowAfter(2000, "first");
+                await Task.Run(async ()=> await ThrowAfter(2000, "first"));
             }
-            catch (Exception ex)
+            catch (NullReferenceException ex)
             {
+                Console.WriteLine(ex.GetType());
                 Console.WriteLine("handled {0}", ex.Message);
             }
             finally
@@ -298,7 +299,7 @@ namespace Async
         static async Task ThrowAfter(int ms, string message)
         {
             await Task.Delay(ms);
-            throw new Exception(message);
+            throw new NullReferenceException(message);
         }
 
 

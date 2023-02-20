@@ -3,8 +3,16 @@ using System.Text;
 
 namespace Patterns
 {
+    // sealed гарантирует, что нельзя создавать потомков от этого класса
     public sealed class Singleton
     {
+        #region Состояние
+        // все состояние должно быть потокобезопасным
+        public int MyProperty { get; private set; }
+        public Product Product { get; private set; }
+
+        #endregion
+
         private static readonly Lazy<Singleton> _instance =
         new Lazy<Singleton>(() => new Singleton());
         Singleton() { }
@@ -21,11 +29,6 @@ namespace Patterns
         }
     }
     
-
-
-
-
-
     public sealed class Singleton1
     {
         private static  Singleton1 _instance;

@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Patterns\Patterns.csproj" />
-    <ProjectReference Include="..\Strategy\Strategy.csproj" />
   </ItemGroup>
 
 </Project>

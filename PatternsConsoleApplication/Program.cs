@@ -1,6 +1,7 @@
 ﻿using Patterns;
-using Strategy;
-using Strategy.Delegates;
+using Patterns.Decorator;
+using Patterns.Strategy;
+using Patterns.Strategy.Delegates;
 using System;
 
 namespace PatternsConsoleApplication
@@ -24,7 +25,7 @@ namespace PatternsConsoleApplication
             #region Strategy
 
             Order order = new Order() { Weight = 10, Height = 1, Lenght = 2, Width = 3 };
-            DeliveryService NskDelivery= new DeliveryService(new WeightPriceCalculationStrategy(10));
+            DeliveryService NskDelivery = new DeliveryService(new WeightPriceCalculationStrategy(10));
 
             Console.WriteLine($"price n = {NskDelivery.CalculatePrice(order)}");
 
@@ -39,15 +40,35 @@ namespace PatternsConsoleApplication
             #region StrategyDelegates
 
             Order order1 = new Order() { Weight = 10, Height = 1, Lenght = 2, Width = 3 };
-            DeliveryServiceDelegate  NskDelivery1 = new DeliveryServiceDelegate((order) => order.Weight * 10);
+            DeliveryServiceDelegate NskDelivery1 = new DeliveryServiceDelegate((order) => order.Weight * 10);
 
             Console.WriteLine($"price n = {NskDelivery.CalculatePrice(order)}");
 
 
-            DeliveryServiceDelegate BerdskDelivery1 = new DeliveryServiceDelegate((order) => order.Width * order.Height * order.Lenght * 12 );
+            DeliveryServiceDelegate BerdskDelivery1 = new DeliveryServiceDelegate((order) => order.Width * order.Height * order.Lenght * 12);
 
 
             Console.WriteLine($"price b = {BerdskDelivery.CalculatePrice(order)}");
+            #endregion
+
+            #region Decorators
+
+            PriceCalculator priceCalculator = new PriceCalculator();
+
+            PriceCalculator weightCalc = new WeightPriceDecorator(priceCalculator);
+
+            PriceCalculator volumeCalc = new VolumeDecorator(priceCalculator);
+
+            PriceCalculator volumeRegularCalc = new SaleClientDecorator(volumeCalc, 0.9);
+
+            PriceCalculator volumeRegularEveningCalc = new SaleClientDecorator(volumeRegularCalc, 1.09);
+
+            Console.WriteLine($"1 PC = {priceCalculator.CalculatePrice(order)}");
+            Console.WriteLine($"2 Weight = {weightCalc.CalculatePrice(order)}");
+            Console.WriteLine($"3 volume = {volumeCalc.CalculatePrice(order)}");
+            Console.WriteLine($"3 volume reg = {volumeRegularCalc.CalculatePrice(order)}");
+            Console.WriteLine($"3 volume reg eve = {volumeRegularEveningCalc.CalculatePrice(order)}");
+            Console.WriteLine($"3 volume reg = {volumeRegularCalc.CalculatePrice(order)}");
             #endregion
             Console.ReadLine();
         }

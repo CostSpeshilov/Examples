@@ -1,5 +1,7 @@
 ﻿using Patterns;
 using Patterns.Decorator;
+using Patterns.Observer;
+using Patterns.Observer.Events;
 using Patterns.Strategy;
 using Patterns.Strategy.Delegates;
 using System;
@@ -69,6 +71,26 @@ namespace PatternsConsoleApplication
             Console.WriteLine($"3 volume reg = {volumeRegularCalc.CalculatePrice(order)}");
             Console.WriteLine($"3 volume reg eve = {volumeRegularEveningCalc.CalculatePrice(order)}");
             Console.WriteLine($"3 volume reg = {volumeRegularCalc.CalculatePrice(order)}");
+            #endregion
+
+            #region Observers
+
+            IProgressObserver progressObserver = new WordCountProgressObserver(ConsoleColor.Red);
+            IProgressObserver progressObserver1 = new WordCountProgressObserver(ConsoleColor.Green);
+            WordCounter wc = new WordCounter();
+            wc.AddObserver(progressObserver);
+            wc.AddObserver(progressObserver1);
+            wc.CountWords(@"H:\");
+
+
+            // События
+            WordCounterEvents wordCounterEvents = new WordCounterEvents();
+            // Подписка на событие
+            wordCounterEvents.ProgressNotified += EventObserver.WordCounterEvents_ProgressNotified;
+            wordCounterEvents.CountWords(@"H:\");
+            // Отписка от события
+            wordCounterEvents.ProgressNotified -= EventObserver.WordCounterEvents_ProgressNotified;
+
             #endregion
             Console.ReadLine();
         }

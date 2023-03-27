@@ -32,6 +32,11 @@ namespace ParallelIssues
         }
 
 
+        /// <summary>
+        /// Возможна ошибка, так как есть изменяемое разделяемое состояние (result)
+        /// </summary>
+        /// <param name="numbers"></param>
+        /// <returns></returns>
         public static IEnumerable<int> SearchAllPrimeNumbersParallel(IEnumerable<int> numbers)
         {
             List<int> result = new List<int>();
@@ -45,7 +50,7 @@ namespace ParallelIssues
         }
 
         /// <summary>
-        /// Возможна ошибка, так как есть изменяемое разделяемое состояние
+        /// Возможна ошибка, так как есть изменяемое разделяемое состояние в четвёртом делегате
         /// </summary>
         /// <param name="numbers"></param>
         /// <returns></returns>
@@ -71,6 +76,11 @@ namespace ParallelIssues
         }
 
 
+        /// <summary>
+        /// Нет ошибки параллельности, так используется специальная потокобезопасная коллекция
+        /// </summary>
+        /// <param name="numbers"></param>
+        /// <returns></returns>
         public static IEnumerable<int> SearchAllPrimeNumbersParallelConcurrentBag(IEnumerable<int> numbers)
         {
             ConcurrentBag<int> result = new ConcurrentBag<int>();
@@ -84,7 +94,12 @@ namespace ParallelIssues
             return result;
         }
 
-
+        /// <summary>
+        /// Есть ошибка. Несмотря на то, что ImmutableList - потокобезопасная коллекция,
+        /// присваивание  result = result.Add(number); таким не является
+        /// </summary>
+        /// <param name="numbers"></param>
+        /// <returns></returns>
         public static IEnumerable<int> SearchAllPrimeNumbersParallelImmutableList(IEnumerable<int> numbers)
         {
             ImmutableList<int> result = ImmutableList.Create<int>();
@@ -96,6 +111,12 @@ namespace ParallelIssues
             return result;
         }
 
+        /// <summary>
+        /// Нет ошибки, так как обновление коллекции происходит с помощью потокобезопасного 
+        /// класса ImmutableInterlocked
+        /// </summary>
+        /// <param name="numbers"></param>
+        /// <returns></returns>
         public static IEnumerable<int> SearchAllPrimeNumbersParallelImmutableListInterlocked(IEnumerable<int> numbers)
         {
             ImmutableList<int> result = ImmutableList.Create<int>();
@@ -128,6 +149,11 @@ namespace ParallelIssues
             return result;
         }
 
+        /// <summary>
+        /// Есть ошибка. используется разделяемый непотокобезопасный ресурс Dictionary
+        /// </summary>
+        /// <param name="numbers"></param>
+        /// <returns></returns>
         public static IDictionary<int, int> CountDivisorsSequential(IEnumerable<int> numbers)
         {
             Dictionary<int, int> result = new Dictionary<int, int>();
@@ -149,6 +175,11 @@ namespace ParallelIssues
             return result;
         }
 
+        /// <summary>
+        /// Нет параллельности
+        /// </summary>
+        /// <param name="numbers"></param>
+        /// <returns></returns>
         public static IDictionary<int, int> CountDivisorsConcurrentDictionary(IEnumerable<int> numbers)
         {
             ConcurrentDictionary<int, int> result = new ConcurrentDictionary<int, int>();
@@ -167,6 +198,11 @@ namespace ParallelIssues
             return result;
         }
 
+        /// <summary>
+        /// Нет ошибки. используется разделяемый потокобезопасный ресурс ConcurrentDictionary
+        /// </summary>
+        /// <param name="numbers"></param>
+        /// <returns></returns>
         public static IDictionary<int, int> CountDivisorsParallelConcurrentDictionary(IEnumerable<int> numbers)
         {
             ConcurrentDictionary<int, int> result = new ConcurrentDictionary<int, int>();
@@ -186,7 +222,12 @@ namespace ParallelIssues
             return result;
         }
 
-
+        /// <summary>
+        /// Нет ошибки, так как обновление коллекции происходит с помощью потокобезопасного 
+        /// класса ImmutableInterlocked
+        /// </summary>
+        /// <param name="numbers"></param>
+        /// <returns></returns>
         public static IDictionary<int, int> CountDivisorsParallelImmutableDictionary(IEnumerable<int> numbers)
         {
             ImmutableDictionary<int, int> result = ImmutableDictionary.Create<int, int>();

@@ -11,6 +11,7 @@ namespace Async
     /// </summary>
     class Program
     {
+        static bool finished = false;
         /// <summary>
         /// Раскомментируйте необходимые строчки по одной
         /// Следите за порядком вывода сообщений на консоль
@@ -20,8 +21,9 @@ namespace Async
         {
             //var ctx = new DispatcherSynchronizationContext();
             Console.WriteLine("Start of Programm");
-            // Console.WriteLine(GreetingAsync("john"));
-            // CallerWithAsync3();
+            Console.WriteLine("Programm.Main in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
+           // Console.WriteLine(GreetingAsync("john"));
+            CallerWithAsync4();
             // CallerWithContinuationTask();
             // MultipleAsyncMethods();
             // MultipleAsyncMethodsWithCombinators1();
@@ -38,9 +40,14 @@ namespace Async
             //HandleOneError();
             //StartTwoTasks();
             //StartTwoTasksParallel();
-            ShowAggregatedException();
+            // ShowAggregatedException();
 
             Console.WriteLine("end of Programm");
+            while (!finished)
+            {
+                Thread.Sleep(500);
+                Console.WriteLine($"not finished in thread {Thread.CurrentThread.ManagedThreadId},{Task.CurrentId}");
+            }
             Console.ReadLine();
 
 
@@ -109,9 +116,11 @@ namespace Async
         private static async Task CallerWithAsync()
         {
             Console.WriteLine("started CallerWithAsync in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
+
             string result = GreetingAsync("Stephanie").Result;
+
             Console.WriteLine(result);
-            Console.WriteLine("finished GreetingAsync in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
+            Console.WriteLine("finished CallerWithAsync in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
         }
 
         /// <summary>
@@ -120,13 +129,14 @@ namespace Async
         /// </summary>
         private static async void CallerWithAsync2()
         {
-            Console.WriteLine("started CallerWithAsync in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
+            Console.WriteLine("started CallerWithAsync2 in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
 
 
+            string result = await GreetingAsync("Stephanie");
 
-
-            Console.WriteLine(await GreetingAsync("Stephanie"));
-            Console.WriteLine("finished GreetingAsync in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
+            Console.WriteLine(result);
+            Console.WriteLine("finished CallerWithAsync2 in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
+            finished = true;
         }
 
         /// <summary>
@@ -135,16 +145,23 @@ namespace Async
         /// </summary>
         private static void CallerWithAsync3()
         {
-            Task.Run(async () => {
+            Task.Run(async () =>
+            {
                 await CallerWithAsync();
-                Console.WriteLine("end CallerWithAsync in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
+                Console.WriteLine("end CallerWithAsync3 in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
             }).Wait();
+            finished = true;
         }
 
-        private static void CallerWithAsync4()
+        private static async void CallerWithAsync4()
         {
-          var t =  Task.Run(CallerWithAsync);
-           
+            Console.WriteLine("start CallerWithAsync4 in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
+
+            Task t = Task.Run(CallerWithAsync);
+
+            await t;
+            finished = true;
+            Console.WriteLine("end CallerWithAsync4 in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
         }
 
         /// <summary>
@@ -176,7 +193,7 @@ namespace Async
 
             Thread.Sleep(3000);
 
-
+            return $"Hello, {name}";
             return string.Format("Hello, {0}", name);
         }
 
@@ -283,7 +300,7 @@ namespace Async
         {
             try
             {
-                await Task.Run(async ()=> await ThrowAfter(2000, "first"));
+                await Task.Run(async () => await ThrowAfter(2000, "first"));
             }
             catch (NullReferenceException ex)
             {
@@ -304,7 +321,7 @@ namespace Async
 
 
         static void BlockingOperations()
-        {                       
+        {
             Task<List<int>> taskWithFactoryAndState1 = Task.Factory.StartNew<List<int>>((stateObj) =>
             {
                 Console.WriteLine("Внутри Task");
@@ -338,7 +355,7 @@ namespace Async
 
             // Task.StartNew не блокирует вызывающий поток, прошло 0 мс
             Console.WriteLine(string.Format("После запуска, have waited {0}ms",
-                watch.ElapsedMilliseconds));                    
+                watch.ElapsedMilliseconds));
 
 
             var result = taskWithFactoryAndState2.Result;

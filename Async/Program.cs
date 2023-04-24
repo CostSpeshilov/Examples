@@ -11,7 +11,7 @@ namespace Async
     /// </summary>
     class Program
     {
-        static bool finished = false;
+        public static bool finished = false;
         /// <summary>
         /// Раскомментируйте необходимые строчки по одной
         /// Следите за порядком вывода сообщений на консоль
@@ -22,8 +22,8 @@ namespace Async
             //var ctx = new DispatcherSynchronizationContext();
             Console.WriteLine("Start of Programm");
             Console.WriteLine("Programm.Main in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
-           // Console.WriteLine(GreetingAsync("john"));
-            CallerWithAsync4();
+            // Console.WriteLine(GreetingAsync("john"));
+            //CallerWithAsync4();
             // CallerWithContinuationTask();
             // MultipleAsyncMethods();
             // MultipleAsyncMethodsWithCombinators1();
@@ -42,15 +42,18 @@ namespace Async
             //StartTwoTasksParallel();
             // ShowAggregatedException();
 
+            //Combinators.WhenAnyWhenAll();
+            Combinators.WaitAnyWaitAll();
+
+
             Console.WriteLine("end of Programm");
             while (!finished)
             {
                 Thread.Sleep(500);
                 Console.WriteLine($"not finished in thread {Thread.CurrentThread.ManagedThreadId},{Task.CurrentId}");
             }
+
             Console.ReadLine();
-
-
         }
 
         /// <summary>

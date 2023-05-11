@@ -15,7 +15,7 @@ namespace Async
         /// Метод показывает правильный способ обработки несколькох исключений,
         /// которые могут возникнуть в нескольких асинхронных методах
         /// </summary>
-        private static async void ShowAggregatedException()
+        internal static async void ShowAggregatedException()
         {
             Task taskResult = null;
             try
@@ -25,8 +25,7 @@ namespace Async
                 await (taskResult = Task.WhenAll(t1, t2));
             }
             catch (Exception ex)
-            {
-                // just display the exception information of the first task that is awaited within WhenAll
+            {                
                 // в переменной ex хранится только одно исключение - то, которое возникло первым
                 Console.WriteLine("handled {0}", ex.Message);
 
@@ -46,18 +45,18 @@ namespace Async
         /// <summary>
         /// Метод показывает неправильный способ обработки множественных исключений
         /// </summary>
-        private static async void StartTwoTasksParallel()
+        internal static async void StartTwoTasksParallel()
         {
             Task t1 = null;
             try
             {
                 t1 = ThrowAfter(2000, "first");
                 Task t2 = ThrowAfter(1000, "second");
-                await Task.WhenAll(t1, t2);
+                await Task.WhenAll(t1, t2); // Оба исключения будут выброшены
             }
             catch (Exception ex)
             {
-                // just display the exception information of the first task that is awaited within WhenAll
+                // На экран будет выведено сообщение только о первом возникшем исключении
                 Console.WriteLine("handled {0}", ex.Message);
             }
             finally
@@ -70,12 +69,12 @@ namespace Async
         /// Метод иллюстрирует ситуацию, когда выбрасывается исключение в методе, который вызывается с ключевым словом await
         /// Исключение будет обработано
         /// </summary>
-        private static async void StartTwoTasks()
+        internal static async void StartTwoTasks()
         {
             try
             {
                 await ThrowAfter(2000, "first");
-                await ThrowAfter(1000, "second"); // the second call is not invoked because the first method throws an exception
+                await ThrowAfter(1000, "second"); // Второе исключение не будет выброшено, так как этот метод не будет вызван
             }
             catch (Exception ex)
             {
@@ -90,12 +89,12 @@ namespace Async
         /// <summary>
         /// Если метод не ожидается, то исключение не будет обработано, так как метод DontHandle уже завершит свою работу
         /// </summary>
-        private static void DontHandle()
+        internal static void DontHandle()
         {
             try
             {
                 ThrowAfter(200, "first");
-                // exception is not caught because this method is finished before the exception is thrown
+                // Исключение не будет поймано, так как блок try завершится до того, как исключение будет выброшено
             }
             catch (Exception ex)
             {
@@ -110,7 +109,7 @@ namespace Async
         /// <summary>
         /// Исключение будет обработано
         /// </summary>
-        private static async void HandleOneError()
+        internal static async void HandleOneError()
         {
             try
             {

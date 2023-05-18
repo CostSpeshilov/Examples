@@ -6,11 +6,16 @@
              xmlns:local="clr-namespace:MvvmDemoApp.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="bvc"/>
+    </UserControl.Resources>
     <StackPanel>
         <TextBlock Text="{Binding Name}"/>
-        <ListBox ItemsSource="{Binding Students}"
+        <ListBox 
+                ItemsSource="{Binding Students}"
                  SelectedItem="{Binding SelectedStudent}"/>
         <Button Content="Показать информацию о студенте" 
-                Command="{Binding ShowStudent}"/>
+                Command="{Binding ShowStudent}" 
+                Visibility="{Binding IsVisible, Converter={StaticResource ResourceKey=bvc}}"/>
     </StackPanel>
 </UserControl>

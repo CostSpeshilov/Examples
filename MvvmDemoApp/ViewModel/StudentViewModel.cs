@@ -56,5 +56,13 @@ namespace MvvmDemoApp.ViewModel
         {
             mwVM.Content = new GroupViewModel(student.Group, mwVM);
         }
+
+        public ICommand ChangeSurname
+            => new RelayCommand((_) => ChangeSurnameImpl());
+
+        private void ChangeSurnameImpl()
+        {
+            Surname += "s";
+        }
     }
 }

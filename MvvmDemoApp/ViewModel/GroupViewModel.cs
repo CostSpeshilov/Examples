@@ -63,6 +63,7 @@ namespace MvvmDemoApp.ViewModel
                 if (selectedStudent == value) return;
                 selectedStudent = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(IsVisible));
             }
         }
 
@@ -77,5 +78,6 @@ namespace MvvmDemoApp.ViewModel
             return selectedStudent != null;
         }
 
+        public bool IsVisible => CanShowStudent();
     }
 }

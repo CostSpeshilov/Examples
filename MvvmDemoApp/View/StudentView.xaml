@@ -9,8 +9,9 @@
     <StackPanel>
         <TextBlock Text="Информация о студенте:"/>
         <TextBlock Text="{Binding Name}"/>
-        <TextBox Text="{Binding Surname}"/>
+        <TextBox Text="{Binding Surname, Mode=OneTime}"/>
         <TextBlock Text="{Binding Birthday}"/>
         <Button Content="К группе" Command="{Binding ToGroup}"/>
+        <Button Content="Сменить фамилию" Command="{Binding ChangeSurname}"/>
     </StackPanel>
 </UserControl>

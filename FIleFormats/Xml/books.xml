@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfBook xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Book>
+    <Id>1</Id>
+    <Name>Капитанская дочка</Name>
+    <Author>
+      <Id>1</Id>
+      <Name>Александр</Name>
+      <Surname>Пушкин</Surname>
+    </Author>
+    <PublishingYears>
+      <int>1900</int>
+      <int>1930</int>
+      <int>1850</int>
+      <int>2013</int>
+    </PublishingYears>
+  </Book>
+  <Book>
+    <Id>2</Id>
+    <Name>Евгений Онегин</Name>
+    <Author>
+      <Id>1</Id>
+      <Name>Александр</Name>
+      <Surname>Пушкин</Surname>
+    </Author>
+    <PublishingYears>
+      <int>2023</int>
+      <int>1990</int>
+    </PublishingYears>
+  </Book>
+  <Book>
+    <Id>3</Id>
+    <Name>Преступление и наказание</Name>
+    <Author>
+      <Id>2</Id>
+      <Name>Федор</Name>
+      <Surname>Достоевский</Surname>
+    </Author>
+    <PublishingYears>
+      <int>1950</int>
+    </PublishingYears>
+  </Book>
+  <Book>
+    <Id>4</Id>
+    <Name>Машина времени</Name>
+    <Author>
+      <Id>3</Id>
+      <Name>Герберт</Name>
+      <Surname>Уэллс</Surname>
+    </Author>
+    <PublishingYears>
+      <int>1963</int>
+    </PublishingYears>
+  </Book>
+  <Book>
+    <Id>5</Id>
+    <Name>Как важно быть серьёзным</Name>
+    <Author>
+      <Id>4</Id>
+      <Name>Оскар</Name>
+      <Surname>Уайлд</Surname>
+    </Author>
+    <PublishingYears>
+      <int>2001</int>
+    </PublishingYears>
+  </Book>
+</ArrayOfBook>

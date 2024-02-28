@@ -10,7 +10,10 @@ namespace Patterns.Strategy.Delegates
     {
         readonly Func<Order, double> _calculatePrice;
 
-        public DeliveryServiceDelegate(Func<Order, double> calculatePrice)
+        int orderCOunt = 0;
+
+        public DeliveryServiceDelegate(
+            Func<Order, double> calculatePrice)
         {
             _calculatePrice = calculatePrice;
         }

@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace Patterns.TemplateMethod
 {
     // Т - обобщение, которое будет уточнено в потомках
-    internal abstract class QuickSort<T>
+    public abstract class QuickSort<T>
+        where T:IComparable<T>
     {
         // Сам алгоритм
         public List<T> Sort(List<T> unsorted)
@@ -49,6 +50,10 @@ namespace Patterns.TemplateMethod
         }
 
         // Конкретный шаг, который будет переопределён в потомках
-        protected abstract int Compare(T item, T first);
+        protected virtual int Compare(T item, T first)
+        {
+            return item.CompareTo(first);
+        }
+
     }
 }

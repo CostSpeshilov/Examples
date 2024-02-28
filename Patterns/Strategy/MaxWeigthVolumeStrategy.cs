@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Patterns.Strategy
 {
-    internal class MaxWeigthVolumeStrategy
+    public class MaxWeigthVolumeStrategy
         : IPriceCalculationStategy
     {
         private readonly int _priceForKg;

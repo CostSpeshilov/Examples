@@ -9,7 +9,7 @@ namespace Patterns.Strategy
     public class WeightPriceCalculationStrategy
         : IPriceCalculationStategy
     {
-        private readonly int _priceForKg;
+        private readonly int _priceForKg = 10;
 
         public WeightPriceCalculationStrategy(int priceForKg)
         {
@@ -18,7 +18,7 @@ namespace Patterns.Strategy
 
         public double CalculatePrice(Order order)
         {
-            return order.Weight * _priceForKg; ;
+            return order.Weight * _priceForKg;
         }
-    }
+    }   
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Patterns.TemplateMethod
 {
-    internal class IntQuickSort : QuickSort<int>
+    public class IntQuickSort : QuickSort<int>
     {
         protected override int Compare(int item, int first)
         {

@@ -20,13 +20,21 @@ namespace PatternsConsoleApplication
             #region Builder
             //Console.WriteLine("Hello World!");
 
-            //Product.ProductBuilder builder = Product.Builder;
+            Product.ProductBuilder builder = Product.Builder;
 
 
-            //Product product = builder.AddName("john")
-            //    .AddOptionalProperty(8)
-            //    .AddOptionalStringProperty("gg")
-            //       .Build(); 
+            Product product = builder.AddName("john")
+                .AddOptionalProperty(8)
+                .AddOptionalStringProperty("gg")
+                .Build();
+
+            Product.SimpleBuilder simpleBuilder = Product.SBuilder;
+
+            var prod = simpleBuilder
+                .WithName("brush")
+                .WithPrice(10m)
+                .Build();
+
             #endregion
 
             //#region Strategy
@@ -160,12 +168,12 @@ namespace PatternsConsoleApplication
 
 
             // События
-            WordCounterEvents wordCounterEvents = new WordCounterEvents();
-            // Подписка на событие
-            wordCounterEvents.ProgressNotified += EventObserver.WordCounterEvents_ProgressNotified;
-            wordCounterEvents.CountWords(@"H:\");
-            // Отписка от события
-            wordCounterEvents.ProgressNotified -= EventObserver.WordCounterEvents_ProgressNotified;
+            //WordCounterEvents wordCounterEvents = new WordCounterEvents();
+            //// Подписка на событие
+            //wordCounterEvents.ProgressNotified += EventObserver.WordCounterEvents_ProgressNotified;
+            //wordCounterEvents.CountWords(@"H:\");
+            //// Отписка от события
+            //wordCounterEvents.ProgressNotified -= EventObserver.WordCounterEvents_ProgressNotified;
 
             #endregion
 

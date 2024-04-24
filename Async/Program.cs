@@ -44,8 +44,9 @@ namespace Async
                 ErrorHandling.StartTwoTasks,
                 ErrorHandling.StartTwoTasksParallel,
                 ErrorHandling.ShowAggregatedException,
-
-
+                Creation.CreateTaskUsingRun,
+                Creation.CreateTaskUsingAnInlineAction,
+                Creation.CreateTaskUsingFactory,
                 CombinatorsWhenAnyWhenAll,
                 CombinatorsWaitAnyWaitAll,
 

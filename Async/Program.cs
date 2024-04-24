@@ -19,45 +19,92 @@ namespace Async
         /// </summary>
         static void Main()
         {
-            //var ctx = new DispatcherSynchronizationContext();
-            //Console.WriteLine("Start of Programm");
-            //Console.WriteLine("Programm.Main in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
-            // Console.WriteLine(GreetingAsync("john"));
-            //CallerWithAsync4();
-            // CallerWithContinuationTask();
-            // MultipleAsyncMethods();
-            // MultipleAsyncMethodsWithCombinators1();
-            // MultipleAsyncMethodsWithCombinators2();
+            Console.WriteLine("Start of Programm");
+           
+            Cancellation can = new Cancellation();
+            List<Action> actions = new List<Action>()
+            {
+                GreetingAsync,
+                CallerWithAsyncStart,
+                CallerWithAsync2,
+                CallerWithAsync3,
+                CallerWithAsync4,
+                CallerWithContinuationTask,
+                MultipleAsyncMethods,
+                MultipleAsyncMethodsWithCombinators1,
+                MultipleAsyncMethodsWithCombinators2,
+                can.NotCancel,
+                can.Cancel,
+                can.CancelMethod,
+                can.CancelRegister,
+                can.CancelMultipleTasks,
+                can.SingleTaskCancellation,
+                ErrorHandling.DontHandle,
+                ErrorHandling.HandleOneError,
+                ErrorHandling.StartTwoTasks,
+                ErrorHandling.StartTwoTasksParallel,
+                ErrorHandling.ShowAggregatedException,
 
-            //Cancellation can = new Cancellation();
-            //can.NotCancel();
-            //can.Cancel();
-            //can.CancelMethod();
-            // can.CancelRegister();
-            //can.CancelMultipleTasks();
-            //can.SingleTaskCancellation();
 
-            //ErrorHandling.DontHandle();
-            //ErrorHandling.HandleOneError();
-            //ErrorHandling.StartTwoTasks();
-            //ErrorHandling.StartTwoTasksParallel();
-            //ErrorHandling.ShowAggregatedException();
+                CombinatorsWhenAnyWhenAll,
+                CombinatorsWaitAnyWaitAll,
+
+                ContinuationContinuationOptional,
+                ContinuationContinuationChains,
+            };
+
+            for (int i = 0; i < actions.Count; i++)
+            {
+                Console.WriteLine($"{i} - {actions[i].Method.Name}");
+            }
+            var chosenActionIndex = Convert.ToInt32( Console.ReadLine());
+            var chosenAction = actions[chosenActionIndex];
 
 
-            //Combinators.WhenAnyWhenAll();
-            //Combinators.WaitAnyWaitAll();
 
-            //Continuation.ContinuationOptional();
-            Continuation.ContinuationChains();
+            chosenAction.Invoke();
+
+            
 
             Console.WriteLine("end of Programm");
-            //while (!finished)
-            //{
-            //    Thread.Sleep(500);
-            //    Console.WriteLine($"not finished in thread {Thread.CurrentThread.ManagedThreadId},{Task.CurrentId}");
-            //}
+
+
+            while (!finished)
+            {
+                Console.WriteLine($"not finished in thread {Thread.CurrentThread.ManagedThreadId},{Task.CurrentId}");
+                var readKey = Console.ReadKey();
+                if (readKey.Key == ConsoleKey.Escape)
+                {
+                    break;
+                }
+            }
 
             Console.ReadLine();
+        }
+
+        private static void GreetingAsync()
+        {
+            Console.WriteLine(GreetingAsync("john"));
+        }
+
+        private static void CombinatorsWhenAnyWhenAll()
+        {
+            Combinators.WhenAnyWhenAll();
+        }
+
+        private static void CombinatorsWaitAnyWaitAll()
+        {
+            Combinators.WaitAnyWaitAll();
+        }
+
+        private static void ContinuationContinuationOptional()
+        {
+            Continuation.ContinuationOptional();
+        }
+
+        private static void ContinuationContinuationChains()
+        {
+            Continuation.ContinuationChains();
         }
 
         /// <summary>
@@ -67,8 +114,13 @@ namespace Async
         private static async void MultipleAsyncMethods()
         {
             string s1 = await GreetingAsync("Stephanie");
+
+            Console.WriteLine("between awaits MultipleAsyncMethods in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
+
             string s2 = await GreetingAsync("Matthias");
             Console.WriteLine("Finished both methods.\n Result 1: {0}\n Result 2: {1}", s1, s2);
+
+            Console.WriteLine("end MultipleAsyncMethods in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
         }
 
         /// <summary>
@@ -116,6 +168,11 @@ namespace Async
 
         }
 
+        private static void CallerWithAsyncStart()
+        {
+            CallerWithAsync();
+        }
+
         /// <summary>
         /// Вызов одного асинхронного метода. 
         /// Выполнение метода не будет прожолжено  пока не завершится работа асинхронного метода 
@@ -152,12 +209,16 @@ namespace Async
         /// </summary>
         private static void CallerWithAsync3()
         {
+            Console.WriteLine("start CallerWithAsync3 in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
+
             Task.Run(async () =>
             {
+                Console.WriteLine("start task in CallerWithAsync3 in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
                 await CallerWithAsync();
-                Console.WriteLine("end CallerWithAsync3 in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
+                Console.WriteLine("end task in CallerWithAsync3 in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
             }).Wait();
             finished = true;
+            Console.WriteLine("end CallerWithAsync3 in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
         }
 
         private static async void CallerWithAsync4()
@@ -165,6 +226,8 @@ namespace Async
             Console.WriteLine("start CallerWithAsync4 in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
 
             Task t = Task.Run(CallerWithAsync);
+
+            Console.WriteLine("after task run CallerWithAsync4 in thread {0} and task {1}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId);
 
             await t;
             finished = true;
@@ -178,10 +241,11 @@ namespace Async
         /// <returns></returns>
         static Task<string> GreetingAsync(string name)
         {
+            Console.WriteLine("running greetingasync in thread {0} and task {1}, {2}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId, name);
             //Для получения эффекта асинхронности используется класс Task
             return Task.Run<string /*возвращаемый тип*/>(() =>
             {
-                Console.WriteLine("running greetingasync in thread {0} and task {1}, {2}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId, name);
+                Console.WriteLine("running task in greetingasync in thread {0} and task {1}, {2}", Thread.CurrentThread.ManagedThreadId, Task.CurrentId, name);
                 //вызов синхронного метода
                 return Greeting(name);
             });
@@ -201,7 +265,6 @@ namespace Async
             Thread.Sleep(3000);
 
             return $"Hello, {name}";
-            return string.Format("Hello, {0}", name);
         }
 
         static void BlockingOperations()

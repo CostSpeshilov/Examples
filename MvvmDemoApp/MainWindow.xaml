@@ -30,5 +30,6 @@
         </DataTemplate>
 
     </Window.Resources>
+    
     <ContentPresenter Content="{Binding Content}"/>
 </Window>

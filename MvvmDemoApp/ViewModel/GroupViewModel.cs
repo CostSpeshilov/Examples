@@ -13,15 +13,12 @@ namespace MvvmDemoApp.ViewModel
     public class GroupViewModel : ViewModelBase
     {
         private Group group;
-        private readonly MainWindowViewModel mwVm;
         private ObservableCollection<StudentShortViewModel> students;
         private StudentShortViewModel selectedStudent;
 
-        public GroupViewModel(Group _group,
-            MainWindowViewModel mwVm)
+        public GroupViewModel(Group _group)
         {
             this.group = _group;
-            this.mwVm = mwVm;
             IEnumerable<StudentShortViewModel> studentsVMs =
                 from student in _group.Students
                 select new StudentShortViewModel(student);
@@ -70,7 +67,10 @@ namespace MvvmDemoApp.ViewModel
         private void ShowStudentImpl()
         {
             Student student = group.Students.First(x => x.Surname + x.Name[0] == selectedStudent.FIO);
-            mwVm.Content = new StudentViewModel(student, mwVm);
+
+            var svm = new StudentViewModel(student);
+
+            NavigateTo(svm);
         }
 
         private bool CanShowStudent()

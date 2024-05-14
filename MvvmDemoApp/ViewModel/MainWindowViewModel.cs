@@ -14,20 +14,27 @@ namespace MvvmDemoApp.ViewModel
         public MainWindowViewModel()
         {
             Repository repository = new Repository();
-            group = new GroupViewModel(repository.GetGroup(), this);
+            _content = new GroupViewModel(repository.GetGroup());
+            _content.NavigateToRequested += _content_NavigateToRequested;
         }
 
-        private ViewModelBase group;
+        private void _content_NavigateToRequested(object? sender, ViewModelBase e)
+        {
+            Content = e;
+            e.NavigateToRequested += _content_NavigateToRequested;
+        }
+
+        private ViewModelBase _content;
 
         public ViewModelBase Content
         {
-            get => group;
+            get => _content;
             set
             {
-                if (group == value) return;
-                group = value;
+                if (_content == value) return;
+                _content = value;
                 OnPropertyChanged();
             }
-        }        
+        }
     }
 }

@@ -14,6 +14,10 @@ namespace MvvmDemoApp.Model
 
         public void AddStudent(Student student)
         {
+            if (Students.Contains(student))
+            {
+                return;
+            }
             student.Group = this;
             Students.Add(student);            
         }

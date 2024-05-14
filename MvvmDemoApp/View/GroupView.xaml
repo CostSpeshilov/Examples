@@ -13,7 +13,7 @@
         <TextBlock Text="{Binding Name}"/>
         <ListBox 
                 ItemsSource="{Binding Students}"
-                 SelectedItem="{Binding SelectedStudent}"/>
+                SelectedItem="{Binding SelectedStudent}"/>
         <Button Content="Показать информацию о студенте" 
                 Command="{Binding ShowStudent}" 
                 Visibility="{Binding IsVisible, Converter={StaticResource ResourceKey=bvc}}"/>

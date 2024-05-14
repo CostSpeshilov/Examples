@@ -16,5 +16,12 @@ namespace MvvmDemoApp.ViewModel
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public event EventHandler<ViewModelBase> NavigateToRequested;
+
+        public void NavigateTo(ViewModelBase to)
+        {
+            NavigateToRequested?.Invoke(this, to);
+        }
     }
 }

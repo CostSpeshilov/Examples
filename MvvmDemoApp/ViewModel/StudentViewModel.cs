@@ -30,12 +30,10 @@ namespace MvvmDemoApp.ViewModel
         }
         
         private Student student;
-        private readonly MainWindowViewModel mwVM;
 
-        public StudentViewModel(Student student, MainWindowViewModel mwVM)
+        public StudentViewModel(Student student)
         {
             this.student = student;
-            this.mwVM = mwVM;
         }
 
         public string Birthday
@@ -54,8 +52,9 @@ namespace MvvmDemoApp.ViewModel
 
         private void ToGroupImpl()
         {
-            mwVM.Content = new GroupViewModel(student.Group, mwVM);
+            NavigateTo(new GroupViewModel(student.Group));
         }
+        
 
         public ICommand ChangeSurname
             => new RelayCommand((_) => ChangeSurnameImpl());
